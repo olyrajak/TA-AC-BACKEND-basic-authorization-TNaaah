@@ -15,6 +15,8 @@ router.get("/new", function (req, res, next) {
   res.render("articleForm");
 });
 router.post("/", (req, res, next) => {
+  console.log(req.user._id);
+  req.body.author = req.user._id;
   article.create(req.body, (err, createdarticle) => {
     console.log(req.body);
     if (err) {
