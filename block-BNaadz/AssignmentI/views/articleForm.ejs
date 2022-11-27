@@ -19,7 +19,19 @@
         </div>
         <div class="content">
             <section>
-
+  <% if(user){ %>
+            <h2 style="color:white;text-decoration: underline;">User Details</h1>
+                <div class="border">
+                    <h3 style="color:white">
+                        Name:
+                        <%= user.name %>
+                    </h3>
+                    <h3 style="color:white">
+                        Email Id :
+                        <%= user.email %>
+                    </h3>
+                </div>
+                <% } %>
                 <div class="container">
                     <div class="title">Registration</div>
                     <form action="/articles" method="POST">
@@ -32,10 +44,7 @@
                                 <span class="details">Tags</span>
                                 <input type="text" name="tags" placeholder="Tags">
                             </div>
-                            <div class="input__box">
-                                <span class="details">Author</span>
-                                <input type="text" name="author" placeholder="Author">
-                            </div>
+                          
                             <div class="input__box">
                                 <span class="details">Likes</span>
                                 <input type="number" name="likes" placeholder="Likes" min="0">
