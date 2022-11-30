@@ -31,7 +31,9 @@ mongoose.connect(
   }
 );
 // view engine setup
+
 app.set("views", path.join(__dirname, "views"));
+
 app.set("view engine", "ejs");
 
 app.use(logger("dev"));
@@ -44,7 +46,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    // store: new MongoStore({ mongooseConnection: mongoose.connection })
+  
   })
 );
 app.use(flash());
