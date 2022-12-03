@@ -1,24 +1,38 @@
 var express = require("express");
 var router = express.Router();
 var article = require("../models/article");
+var user = require("../models/user");
 var Comment = require("../models/comment");
 var auth = require("../middlewares/auth");
 router.get("/", (req, res) => {
   article.find({}, (err, article) => {
-    console.log(err, article);
+    // console.log(err, article);
     if (err) return next(err);
     res.render("article", { articles: article });
   });
 });
+router.get("/:id", (req, res, next) => {
+  var id = req.params.id;
+  article
+    .findById(id)
+    .populate("comments")
+    .exec((err, result) => {
+      if (err) return next(err);
+      res.render("singlearticle", { result: result });
+    });
+});
+
 router.use(auth.loggedInUser);
 router.get("/new", function (req, res, next) {
   res.render("articleForm");
 });
+router.use(auth.loggedInUser);
 router.post("/", (req, res, next) => {
+  // console.log(req.body.author);
   console.log(req.user._id);
   req.body.author = req.user._id;
   article.create(req.body, (err, createdarticle) => {
-    console.log(req.body);
+    // console.log(req.body);
     if (err) {
       return next(err);
     }
@@ -39,17 +53,6 @@ router.post("/", (req, res, next) => {
 
 //     });
 // });
-
-router.get("/:id", (req, res, next) => {
-  var id = req.params.id;
-  article
-    .findById(id)
-    .populate("comments")
-    .exec((err, result) => {
-      if (err) return next(err);
-      res.render("singlearticle", { result: result });
-    });
-});
 
 router.get("/:id/edit", (req, res) => {
   var id = req.params.id;
@@ -107,7 +110,7 @@ router.post("/:id/comments", (req, res, next) => {
 
   req.body.articleId = id;
   Comment.create(req.body, (err, comment) => {
-    console.log(err, comment);
+    // console.log(err, comment);
     if (err) return next(err);
     article.findByIdAndUpdate(
       id,

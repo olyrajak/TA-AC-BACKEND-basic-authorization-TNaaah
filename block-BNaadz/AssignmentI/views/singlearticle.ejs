@@ -41,7 +41,9 @@
 
     <div class="flex">
         <a href="/articles" class="btn btn-primary"> Article </a>
+          <% if(user){ %>
         <a href="/articles/new" class="btn btn-secondary">Add new Article</a>
+        <%} %>
         <a href="/users/logout" class="btn btn-secondary">Logout</a>
     </div>
     <main class="single">
@@ -51,17 +53,21 @@
             Title :
             <%= result.title %>
         </h4>
+        
         <p class="data">
             Tag :
             <%= result.tag %>
                 <br> Author:
                 <%= result.author %>
-                    <br> Likes :
+                 <% if(user){ %>
+            <br> Likes :
                     <a class="btn btn-outline-primary" href="/articles/<%= result.id %>/decrement">-</a>
                     <%= result.likes %>
                         <a class="btn btn-outline-success" href="/articles/<%= result.id %>/increment">+</a>
                         <br>Description :
                         <%= result.description %>
+                <%} %>
+                   
 
 
         </p>

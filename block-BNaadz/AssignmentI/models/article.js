@@ -7,9 +7,10 @@ const articleSchema = new Schema(
     title: { type: String, required: true },
     description: String,
     tags: [String],
-    author: { type: Schema.Types.ObjectId, ref: "user", required: true },
+
     likes: { type: Number, default: 0 },
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+    author: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   {
     timestamps: true,

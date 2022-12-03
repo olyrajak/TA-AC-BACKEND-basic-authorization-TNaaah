@@ -24,8 +24,9 @@
   <div class="container">
     <div class="flex">
       <a href="/articles" class="btn btn-primary"> Article </a>
-
+      <% if(user){ %>
       <a href="/articles/new" class="btn btn-secondary">Add new Article</a>
+      <%} %>
       <a href=" /users/logout" class="btn btn-primary">Logout</a>
     </div>
     <main class="single">

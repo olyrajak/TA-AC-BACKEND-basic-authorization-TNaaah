@@ -50,12 +50,12 @@ app.use(
   })
 );
 app.use(flash());
+// app.use(auth.UserInfo);
 app.use("/articles", articleRouter);
 
 app.use("/comments", commentrouter);
-app.use(auth.UserInfo);
-app.use("/", indexRouter);
 
+app.use("/", indexRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 
@@ -74,7 +74,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  
+
   res.render("error");
 });
 
